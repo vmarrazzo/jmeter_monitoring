@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="load_msg_sec" elementType="Argument">
+            <stringProp name="Argument.name">load_msg_sec</stringProp>
+            <stringProp name="Argument.value">${__P(rate, 5)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="setupDone" elementType="Argument">
+            <stringProp name="Argument.name">setupDone</stringProp>
+            <stringProp name="Argument.value">false</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="stopDone" elementType="Argument">
+            <stringProp name="Argument.name">stopDone</stringProp>
+            <stringProp name="Argument.value">false</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="dumpFile" elementType="Argument">
+            <stringProp name="Argument.name">dumpFile</stringProp>
+            <stringProp name="Argument.value">./input_dataset.csv</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="influxdb_url" elementType="Argument">
+            <stringProp name="Argument.name">influxdb_url</stringProp>
+            <stringProp name="Argument.value">http://INSERT_YOUR_HOST:8086</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="influxdb_user" elementType="Argument">
+            <stringProp name="Argument.name">influxdb_user</stringProp>
+            <stringProp name="Argument.value">INSERT_YOUR_USER</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="influxdb_password" elementType="Argument">
+            <stringProp name="Argument.name">influxdb_password</stringProp>
+            <stringProp name="Argument.value">INSERT_YOUR_PWD</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="influxdb_db" elementType="Argument">
+            <stringProp name="Argument.name">influxdb_db</stringProp>
+            <stringProp name="Argument.value">INSERT_YOUR_DB</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="apikey" elementType="HTTPArgument">
+              <boolProp name="HTTPArgument.always_encode">true</boolProp>
+              <stringProp name="Argument.value">INSERT_YOUR_APIKEY</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              <stringProp name="Argument.name">apikey</stringProp>
+            </elementProp>
+            <elementProp name="s" elementType="HTTPArgument">
+              <boolProp name="HTTPArgument.always_encode">true</boolProp>
+              <stringProp name="Argument.value">Star Wars</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              <stringProp name="Argument.name">s</stringProp>
+            </elementProp>
+            <elementProp name="type" elementType="HTTPArgument">
+              <boolProp name="HTTPArgument.always_encode">true</boolProp>
+              <stringProp name="Argument.value">movie</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              <stringProp name="Argument.name">type</stringProp>
+            </elementProp>
+          </collectionProp>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">www.omdbapi.com</stringProp>
+        <stringProp name="HTTPSampler.port"></stringProp>
+        <stringProp name="HTTPSampler.protocol"></stringProp>
+        <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+        <stringProp name="HTTPSampler.path">/</stringProp>
+        <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+        <stringProp name="HTTPSampler.connect_timeout">2000</stringProp>
+        <stringProp name="HTTPSampler.response_timeout">8000</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">stoptestnow</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1516290485000</longProp>
+        <longProp name="ThreadGroup.end_time">1516290485000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(&quot;${setupDone}&quot;.equals(&quot;false&quot;))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Verify Dataset Correctness" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import java.util.concurrent.atomic.AtomicInteger
+
+// the sanity check step can be more complex ;-P
+log.info(&quot;#### Input dataset is OK&quot;);
+
+// track shared variables for final stats to InfluxDB
+System.getProperties().put(&quot;total&quot;, new AtomicInteger(0))
+System.getProperties().put(&quot;pass&quot;, new AtomicInteger(0))
+System.getProperties().put(&quot;fail&quot;, new AtomicInteger(0))
+
+// track setup time
+System.getProperties().put(&quot;setupTime&quot;, System.currentTimeMillis())
+
+// track that setup is completed correctly
+vars.put(&quot;setupDone&quot;, &quot;true&quot;)</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <PostThreadGroup guiclass="PostThreadGroupGui" testclass="PostThreadGroup" testname="tearDown" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">stoptestnow</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1516362937000</longProp>
+        <longProp name="ThreadGroup.end_time">1516362937000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </PostThreadGroup>
+      <hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(&quot;${stopDone}&quot;.equals(&quot;false&quot;))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Publish monitoring data" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import org.influxdb.InfluxDBFactory
+import org.influxdb.InfluxDB
+import org.influxdb.BatchOptions
+import org.influxdb.dto.Point
+import org.influxdb.dto.Query
+import java.util.concurrent.TimeUnit
+
+def stopTime = System.currentTimeMillis()
+
+def serverURL = vars.get(&quot;influxdb_url&quot;)
+def username = vars.get(&quot;influxdb_user&quot;)
+def password = vars.get(&quot;influxdb_password&quot;)
+def databaseName = vars.get(&quot;influxdb_db&quot;)
+
+def influxDB = InfluxDBFactory.connect(serverURL, username, password)
+
+influxDB.setDatabase(databaseName)
+
+influxDB.query(new Query(&quot;CREATE DATABASE &quot; + databaseName))
+influxDB.setDatabase(databaseName);
+
+def retentionPolicyName = &quot;one_month_only&quot;
+def queryString = &quot;CREATE RETENTION POLICY ${retentionPolicyName} ON ${databaseName} DURATION 4w REPLICATION 1 DEFAULT&quot;
+influxDB.query(new Query(queryString))
+influxDB.setRetentionPolicy(retentionPolicyName)
+
+// Enable batch writes to get better performance.
+influxDB.enableBatch(BatchOptions.DEFAULTS)
+
+def duration = stopTime - System.getProperties().get(&quot;setupTime&quot;)
+
+// Write points to InfluxDB.
+influxDB.write(Point.measurement(&quot;monitoring_omdb_api&quot;)
+    .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+    .tag(&quot;platform&quot;, &quot;jmeter&quot;)
+    .addField(&quot;total_test&quot;, System.getProperties().get(&quot;total&quot;).get())
+    .addField(&quot;pass_test&quot;, System.getProperties().get(&quot;pass&quot;).get())
+    .addField(&quot;fail_test&quot;, System.getProperties().get(&quot;fail&quot;).get())
+    .addField(&quot;duration&quot;, duration)
+    .build())
+
+// track that tear down is completed correctly
+vars.put(&quot;stopDone&quot;, &quot;true&quot;)</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Iterate Dataset" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">5</stringProp>
+        <stringProp name="ThreadGroup.ramp_time"></stringProp>
+        <longProp name="ThreadGroup.start_time">1516294248000</longProp>
+        <longProp name="ThreadGroup.end_time">1516294248000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
+          <intProp name="calcMode">2</intProp>
+          <stringProp name="throughput">${__jexl2(${load_msg_sec}*60)}</stringProp>
+        </ConstantThroughputTimer>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set splitted into variables" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding">utf8</stringProp>
+          <stringProp name="filename">${dumpFile}</stringProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">false</boolProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+          <boolProp name="stopThread">true</boolProp>
+          <stringProp name="variableNames">year,title,poster_chk</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Check single row" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="y" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">${year}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">y</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor - Title" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">ret_title</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$..Title</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">NOT_FOUND</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor - Poster" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">ret_poster_url</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$..Poster</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">NOT_FOUND</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">System.getProperties().get(&quot;total&quot;).getAndIncrement()
+
+def ret_title = vars.get(&quot;ret_title&quot;)
+def ret_poster_url = vars.get(&quot;ret_poster_url&quot;)
+
+def exp_title = vars.get(&quot;title&quot;)
+def exp_poster_chk = vars.get(&quot;poster_chk&quot;)
+
+if (ret_title.equals(&quot;NOT_FOUND&quot;) || ret_poster_url.equals(&quot;NOT_FOUND&quot;) ) {
+    System.getProperties().get(&quot;fail&quot;).getAndIncrement()
+    def errMsg = &quot;There is missing data between title (${ret_title}) or poster url (${ret_poster_url})!&quot;
+    AssertionResult.setFailureMessage(errMsg)
+    AssertionResult.setFailure(true)
+} else {
+    if ( ret_title.equals(exp_title) ) {
+    
+        try {
+            def content = ret_poster_url.toURL().getBytes()
+            def calculated_chk = new String(content).md5()
+    
+            if ( !calculated_chk.equals(exp_poster_chk) ) {
+                System.getProperties().get(&quot;fail&quot;).getAndIncrement()
+                def errMsg = &quot;Mismatch expected checksum (${exp_poster_chk}) and obtained checksum (${calculated_chk})!&quot;
+                AssertionResult.setFailureMessage(errMsg)
+                AssertionResult.setFailure(true)    
+            }
+            else {
+                // all OK!
+                System.getProperties().get(&quot;pass&quot;).getAndIncrement()
+            }
+        } catch (java.net.MalformedURLException ex) {
+            // probably attached URL is wrongly formatted
+            System.getProperties().get(&quot;fail&quot;).getAndIncrement()
+            AssertionResult.setFailureMessage(&quot;Obtained url is malformed -&gt; ${ret_poster_url}&quot;)
+            AssertionResult.setFailure(true)
+        }
+    }
+}
+
+// just to log execution
+log.info(&quot;#### Returned Title -&gt; &quot; + ret_title)
+log.info(&quot;#### Returned Poster Url -&gt; &quot; + ret_poster_url)</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Assertion>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
